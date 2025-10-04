@@ -1,19 +1,23 @@
-﻿using System;
+using ImGuiNET;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text.Json;
-using ImGuiNET;
+using Vortice.Win32;
 
 namespace Noturnal_Cheat_External
 {
     public class ConfigManager
     {
+        // made it a seperate class, because the renderer.cs was getting bloated
+
         private readonly string configFolder;
-        private readonly float saveTimer = 2.0f; // seconds
+        private readonly float saveTimer = 1.5f; // seconds
         private Dictionary<string, float> saveNotificationTimers = new();
 
         private bool showConfigNameInput = false;
+        private string? configPendingDelete;
         private string newConfigName = "";
         private string currentConfigName = "";
 
@@ -270,22 +274,42 @@ namespace Noturnal_Cheat_External
 
                 ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.6f, 0.1f, 0.1f, 1.0f));
                 if (ImGui.Button($"X##{fileName}"))
-                    ImGui.OpenPopup($"ConfirmDelete##{fileName}");
-                ImGui.PopStyleColor();
-
-                bool isOpen = true;
-                if (ImGui.BeginPopupModal($"ConfirmDelete##{fileName}", ref isOpen, ImGuiWindowFlags.AlwaysAutoResize))
                 {
-                    ImGui.Text($"Are you sure you want to delete {fileName} forever?");
-                    if (ImGui.Button("Yes", new Vector2(160, 0)))
+                    configPendingDelete = fileName;
+                    ImGui.OpenPopup("ConfirmDeletePopup");
+                }
+                ImGui.PopStyleColor();
+            }
+            if (configPendingDelete != null)
+            {
+                bool isOpen = true; // almost useless
+
+                if (ImGui.BeginPopupModal("ConfirmDeletePopup", ref isOpen, ImGuiWindowFlags.AlwaysAutoResize))
+                {
+                    ImGui.Text($"Are you sure you want to delete {configPendingDelete} forever?");
+
+                    if (ImGui.Button("Yes", new Vector2(170, 0)))
                     {
-                        File.Delete(file);
-                        if (currentConfigName == fileName) currentConfigName = "";
+                        string fileToDelete = Path.Combine(configFolder, $"{configPendingDelete}.json");
+                        if (File.Exists(fileToDelete))
+                            File.Delete(fileToDelete);
+
+                        if (currentConfigName == configPendingDelete)
+                            currentConfigName = "";
+
+                        configPendingDelete = null;
                         ImGui.CloseCurrentPopup();
                     }
+
                     ImGui.SameLine();
-                    if (ImGui.Button("Nah", new Vector2(160, 0)))
+
+                    if (ImGui.Button("Nah", new Vector2(170, 0)))
+                    {
+                        configPendingDelete = null;
                         ImGui.CloseCurrentPopup();
+                    }
+
+                    ImGui.EndPopup();
                 }
             }
         }
