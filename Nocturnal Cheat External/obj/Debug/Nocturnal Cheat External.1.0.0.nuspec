@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CS2Cheats</id>
+    <version>1.0.0</version>
+    <authors>CS2Cheats</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="ClickableTransparentOverlay" version="9.1.0" exclude="Build,Analyzers" />
+        <dependency id="swed64" version="1.0.5" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\PC\source\repos\CS2Cheats\CS2Cheats\bin\Debug\net8.0\CS2Cheats.runtimeconfig.json" target="lib\net8.0\CS2Cheats.runtimeconfig.json" />
+    <file src="C:\Users\PC\source\repos\CS2Cheats\CS2Cheats\bin\Debug\net8.0\CS2Cheats.dll" target="lib\net8.0\CS2Cheats.dll" />
+  </files>
+</package>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nocturnal Cheat External", "Nocturnal Cheat External\Nocturnal Cheat External.csproj", "{56E2A259-F9D0-559C-36B7-68134916AE24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56E2A259-F9D0-559C-36B7-68134916AE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E2A259-F9D0-559C-36B7-68134916AE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E2A259-F9D0-559C-36B7-68134916AE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E2A259-F9D0-559C-36B7-68134916AE24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6DD104E-C3A3-4A0A-A297-C786671A7F15}
+	EndGlobalSection
+EndGlobal
