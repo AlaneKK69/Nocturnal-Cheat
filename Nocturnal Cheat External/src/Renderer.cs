@@ -484,9 +484,8 @@ namespace Noturnal_Cheat_External
             float pulse = (float)((Math.Sin(time * 5.0f) + 1.0) / 2.0);
             float animatedRadius = Lerp(headRadius, headRadius * 1.6f, pulse);
 
-            if(!enableTargetingLine)
-                if (selectedDrawTargeting != 0 || selectedDrawTargeting != 1)
-                    drawList.AddCircle(entity.Skeleton2D[2], headRadius, color); // circle on head
+            if (selectedDrawTargeting != 0 || selectedDrawTargeting != 1)
+                drawList.AddCircle(entity.Skeleton2D[2], headRadius, color); // circle on head
 
             drawList.AddLine(entity.Skeleton2D[1], entity.Skeleton2D[2], color, currentBoneThickness); // neck to head
             drawList.AddLine(entity.Skeleton2D[1], entity.Skeleton2D[3], color, currentBoneThickness); // neck to left shoulder
@@ -891,3 +890,4 @@ namespace Noturnal_Cheat_External
         }
     }
 }
+
