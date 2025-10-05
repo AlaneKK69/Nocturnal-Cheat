@@ -1,4 +1,4 @@
-﻿using ClickableTransparentOverlay;
+using ClickableTransparentOverlay;
 using ImGuiNET;
 using System;
 using System.Collections.Concurrent;
@@ -415,8 +415,7 @@ namespace Noturnal_Cheat_External
 
                     // draw the skeleton of enemies
                     if (enableSkeleton)
-                        // if (enableTargetingLine && entity == firstentity)
-                            DrawSkeleton(entity);
+                        DrawSkeleton(entity);
 
                     // draw enemies health
                     if (enableHealthBar)
@@ -476,16 +475,8 @@ namespace Noturnal_Cheat_External
             // Get distance in pixels between head and neck bones
             float headPixelHeight = Vector2.Distance(entity.Skeleton2D[2], entity.Skeleton2D[1]);
 
-            // Scale it up
-            float headRadius = headPixelHeight * 1.3f;
-
-            // pulse head
-            float time = (float)ImGui.GetTime(); 
-            float pulse = (float)((Math.Sin(time * 5.0f) + 1.0) / 2.0);
-            float animatedRadius = Lerp(headRadius, headRadius * 1.6f, pulse);
-
-            if (selectedDrawTargeting != 0 || selectedDrawTargeting != 1)
-                drawList.AddCircle(entity.Skeleton2D[2], headRadius, color); // circle on head
+            if (entity != firstentity && selectedDrawTargeting != 2)
+                drawList.AddCircle(entity.Skeleton2D[2], headPixelHeight * 1.3f, color); // circle on head
 
             drawList.AddLine(entity.Skeleton2D[1], entity.Skeleton2D[2], color, currentBoneThickness); // neck to head
             drawList.AddLine(entity.Skeleton2D[1], entity.Skeleton2D[3], color, currentBoneThickness); // neck to left shoulder
@@ -799,10 +790,10 @@ namespace Noturnal_Cheat_External
             float animatedRadius = Lerp(headPixelHeight * 1.3f, headPixelHeight * 1.3f * 1.6f, pulse);
 
             if (selectedDrawTargeting == 0 || selectedDrawTargeting == 2)
-                drawList.AddLine(new Vector2(screenSize.X / 2, screenSize.Y / 2), entity.head2D, ImGui.ColorConvertFloat4ToU32(Lighten(lineColor, 0f, 0.5f)));
+                drawList.AddLine(new Vector2(screenSize.X / 2, screenSize.Y / 2), entity.head2D, ImGui.ColorConvertFloat4ToU32(lineColor));
 
             if (selectedDrawTargeting == 0 || selectedDrawTargeting == 1)
-                drawList.AddCircle(entity.Skeleton2D[2], animatedRadius, ImGui.ColorConvertFloat4ToU32(Lighten(skeletonColor, 0.3f, 1f))); // circle on head
+                drawList.AddCircle(entity.Skeleton2D[2], animatedRadius, ImGui.ColorConvertFloat4ToU32(Lighten(skeletonColor, 0.3f))); // circle on head
         }
 
         // transfer entity methods
@@ -846,13 +837,13 @@ namespace Noturnal_Cheat_External
         }
 
         // lighten the colors
-        public static Vector4 Lighten(Vector4 color, float amount, float alpha)
+        public static Vector4 Lighten(Vector4 color, float amount)
         {
             return new Vector4(
                 Math.Clamp(color.X + amount, 0f, 1f), // R
                 Math.Clamp(color.Y + amount, 0f, 1f), // G
                 Math.Clamp(color.Z + amount, 0f, 1f), // B
-                Math.Clamp(color.W + alpha, 0f, 1f) // A
+                color.W // A
             );
         }
 
@@ -890,4 +881,3 @@ namespace Noturnal_Cheat_External
         }
     }
 }
-
